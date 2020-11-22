@@ -1,15 +1,18 @@
-name := """scala-play-angular-seed"""
+Global / name := "verity-arbitrage"
 
-version := "1.0-SNAPSHOT"
+Global / organization := "com.verity"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala).settings(
-  watchSources ++= (baseDirectory.value / "ui/src" ** "*").get
-)
 
-resolvers += Resolver.sonatypeRepo("snapshots")
+Global / version := "0.1"
 
-scalaVersion := "2.12.8"
+Global / scalaVersion := "2.12.11"
 
-libraryDependencies += guice
-libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.2" % Test
-libraryDependencies += "com.h2database" % "h2" % "1.4.199"
+lazy val webapp = (project in file("webapp"))
+  .dependsOn(betProcessing)
+  .enablePlugins(PlayScala)
+  .settings(
+    watchSources ++= (baseDirectory.value / "webapp/ui/src" ** "*").get
+  )
+
+lazy val betProcessing = (project in file("bet-processing"))
+

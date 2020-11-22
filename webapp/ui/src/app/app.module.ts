@@ -2,28 +2,28 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { MaterialComponentsModule } from './material-components/material-components.module';
+import { EventsModule } from './events/events.module';
 
 import { AppComponent } from './app.component';
 import { RouteExampleComponent } from './route-example/route-example.component';
+import { EventsTableComponent } from "./events/events-table/events-table.component";
 
 import { AppService } from './app.service';
 import { AppHttpInterceptorService } from './http-interceptor.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {EventsHomeComponent} from "./events/events-home/events-home.component";
 
 const routes: Routes = [
-  {
-    path: 'scala',
-    component: RouteExampleComponent,
-    data: { technology: 'Scala' }
-  },
   {
     path: 'play',
     component: RouteExampleComponent,
     data: { technology: 'Play' }
   },
   {
-    path: 'angular',
-    component: RouteExampleComponent,
-    data: { technology: 'Angular' }
+    path: 'events',
+    component: EventsHomeComponent,
+    data: { technology: 'Play' }
   },
   {
     path: '**',
@@ -35,16 +35,20 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    RouteExampleComponent
+    RouteExampleComponent,
+
   ],
   imports: [
+    MaterialComponentsModule,
+    EventsModule,
     BrowserModule,
     HttpClientModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'Csrf-Token',
       headerName: 'Csrf-Token',
     }),
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule
   ],
   providers: [
     AppService,
