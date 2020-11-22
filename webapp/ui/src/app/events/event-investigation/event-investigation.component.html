@@ -1,0 +1,22 @@
+<mat-toolbar>
+  <span>
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Example home icon"
+      (click)="closeInvestigation()"
+    >arrow_back</mat-icon>
+    {{  market.teams.join(" v ") + " - " + market.sportNice }}
+  </span>
+</mat-toolbar>
+
+<mat-card>
+  <h5> Date: {{  market.commenceTime * 1000  |date }} </h5>
+  <h5> Best margin found: {{  market.bestMargin.toFixed(3)  }} </h5>
+</mat-card>
+
+<mat-card *ngFor="let i of market.bestOdds">
+    <h4>{{  i.name  }}</h4>
+    <p>${{  i.odds  }} - {{  i.site  }}</p>
+    <p> Margin: {{  i.margin.toFixed(3)  }}</p>
+</mat-card>
+

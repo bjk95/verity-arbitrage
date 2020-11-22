@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { AppService } from './app.service';
+import { RouterModule } from '@angular/router';
 import { OddsResponse } from './models/odds-response';
 
 @Component({
@@ -10,8 +11,6 @@ import { OddsResponse } from './models/odds-response';
 })
 export class AppComponent {
   title: string | undefined;
-  postRequestResponse: OddsResponse | undefined;
-  tableHeaders = Array( "teams", "date", "sport", "bestMargin")
 
   constructor(private appService: AppService) {
     this.appService.getWelcomeMessage().subscribe((data: any) => {
@@ -19,14 +18,7 @@ export class AppComponent {
     });
   }
 
-  /**
-   * This method is used to test the post request
-   */
-  public postData(): void {
-    this.appService.sendData().subscribe((data: OddsResponse) => {
-      this.postRequestResponse = data;
-    });
-  }
+
 
 }
 

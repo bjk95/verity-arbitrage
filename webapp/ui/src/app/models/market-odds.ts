@@ -9,4 +9,5 @@ export interface MarketOdds{
   homeTeam: string;
   odds: Array<CompetitorOdds>;
   bestMargin: number;
+  bestOdds: Array<CompetitorOdds>;
 }

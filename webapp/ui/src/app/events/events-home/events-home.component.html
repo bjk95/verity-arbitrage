@@ -1,3 +1,15 @@
-<p>events-home works!</p>
+<div *ngIf="oddsRequestResponse != undefined && market == undefined">
+<h4>Upcoming Events</h4>
+<app-events-table
+                  [marketOdds]="oddsRequestResponse.content"
+                  (createInvestigationEvent)="logInvestigationId($event)"
+>
+</app-events-table>
+</div>
 
-<app-events-table></app-events-table>
+<app-event-investigation
+  *ngIf="oddsRequestResponse != undefined && market != undefined"
+  [market]="market"
+  (closeInvestigationEmitter)="closeInvestigation($event)"
+></app-event-investigation>
+

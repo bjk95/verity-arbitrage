@@ -10,7 +10,8 @@ case class MarketOdds(
                        commenceTime: Long,
                        homeTeam: String,
                        odds: Seq[CompetitorOdds],
-                       bestMargin: Double
+                       bestMargin: Double,
+                      bestOdds: Seq[CompetitorOdds]
                      ) {
   def getBestMargin: Double = getMarketMargin(getBestOddsEachTeam(odds))
 }

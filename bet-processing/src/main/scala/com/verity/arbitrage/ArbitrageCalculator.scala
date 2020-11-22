@@ -5,7 +5,9 @@ import com.verity.arbitrage.HelperFunctions.createMarketOddsId
 
 object ArbitrageCalculator {
 
-  def convertH2hToMarketOdds(oddsResponse: OddsResponseData[H2hOdds]): MarketOdds =
+  def convertH2hToMarketOdds(oddsResponse: OddsResponseData[H2hOdds]): MarketOdds = {
+    val allOdds = getCompetitorH2hOdds(oddsResponse)
+    val bestOdds = getBestOddsEachTeam(allOdds)
     MarketOdds(
       id = createMarketOddsId(oddsResponse),
       sportKey = oddsResponse.sport_key,
@@ -13,9 +15,11 @@ object ArbitrageCalculator {
       teams = oddsResponse.teams,
       commenceTime = oddsResponse.commence_time,
       homeTeam = oddsResponse.home_team,
-      odds = getCompetitorH2hOdds(oddsResponse),
-      bestMargin = getMarketMargin(getBestOddsEachTeam(getCompetitorH2hOdds(oddsResponse)))
+      odds = allOdds,
+      bestMargin = getMarketMargin(bestOdds),
+      bestOdds = bestOdds
     )
+  }
 
   def getCompetitorH2hOdds(oddsResponse: OddsResponseData[H2hOdds]): Seq[CompetitorOdds] =
     oddsResponse.sites
