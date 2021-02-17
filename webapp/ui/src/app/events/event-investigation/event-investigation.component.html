@@ -18,5 +18,30 @@
     <h4>{{  i.name  }}</h4>
     <p>${{  i.odds  }} - {{  i.site  }}</p>
     <p> Margin: {{  i.margin.toFixed(3)  }}</p>
+
+  <table mat-table [dataSource]="allOddsThisCompetitor(i)" matSort class="mat-elevation-z8">
+
+    <!-- Odds Column -->
+    <ng-container matColumnDef="odds" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Odds </th>
+      <td mat-cell *matCellDef="let element"> {{ element.odds }} </td>
+    </ng-container>
+
+    <!-- Site Column -->
+    <ng-container matColumnDef="site">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Site </th>
+      <td mat-cell *matCellDef="let element"> {{ element.site }}</td>
+    </ng-container>
+
+
+    <!-- Margin Column -->
+    <ng-container matColumnDef="margin">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Margin </th>
+      <td mat-cell *matCellDef="let element"> {{ element.margin }} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="competitorTableColumns "></tr>
+    <tr mat-row *matRowDef="let row; columns: competitorTableColumns;"></tr>
+  </table>
 </mat-card>
 
